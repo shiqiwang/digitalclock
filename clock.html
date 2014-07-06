@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>digital clock</title>
+    <style>
+        body {
+            background-color: #eee;
+        }
+
+        #clock-wrapper {
+            position: absolute;
+            left: 50%; top: 50%;
+            margin: -60px;
+            width: 120px;
+            height: 120px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: solid 1px #ccc;
+        }
+
+        #hours-pointer {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -30px -2px;
+            width: 4px;
+            height: 24px;
+            border-top: solid 36px #999;
+        }
+
+        #minutes-pointer {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -36px -1px;
+            width: 2px;
+            height: 30px;
+            border-top: solid 42px #666;
+        }
+
+        #seconds-pointer {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -37px -1px;
+            width: 2px;
+            height: 30px;
+            border-top: solid 44px #f00;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock-wrapper">
+        <div id="hours-pointer"></div>
+        <div id="minutes-pointer"></div>
+        <div id="seconds-pointer"></div>
+    </div>
+    <script>
+        var hoursPointer = document.getElementById('hours-pointer');
+        var minutesPointer = document.getElementById('minutes-pointer');
+        var secondsPointer = document.getElementById('seconds-pointer');
+        
+        setInterval(updateClock, 1000);
+
+        updateClock();
+
+        function updateClock() {
+            var date = new Date();
+
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            
+            var hoursDeg = (hours % 12 + minutes / 60) * 30;
+            var minutesDeg = minutes * 6;
+            var secondsDeg = seconds * 6;
+
+            hoursPointer.style.webkitTransform =
+            hoursPointer.style.transform = 'rotate(' + hoursDeg + 'deg)';
+
+            minutesPointer.style.webkitTransform =
+            minutesPointer.style.transform = 'rotate(' + minutesDeg + 'deg)';
+
+            secondsPointer.style.webkitTransform =
+            secondsPointer.style.transform = 'rotate(' + secondsDeg + 'deg)';
+
+        }
+    </script>
+</body>
+</html>
